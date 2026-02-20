@@ -1,6 +1,6 @@
 <h1>ExpNo 8 : Solve Cryptarithmetic Problem,a CSP(Constraint Satisfaction Problem) using Python</h1> 
-<h3>Name:               </h3>
-<h3>Register Number/Staff Id:       </h3>
+<h3>Name:      VARSHINI V        </h3>
+<h3>Register Number:  212224020059    </h3>
 <H3>Aim:</H3>
 <p>
     To solve Cryptarithmetic Problem,a CSP(Constraint Satisfaction Problem) using Python
@@ -78,5 +78,55 @@ MORE = 1085<br>
 <hr>
 MONEY = 10652<br>
 <hr>
+
+<h2>Program:</h2>
+
+```
+from itertools import permutations
+
+# Define the words
+word1 = "SEND"
+word2 = "MORE"
+word3 = "MONEY"
+
+# Get all unique letters
+letters = set(word1 + word2 + word3)
+letters = list(letters)
+
+# There must be <= 10 unique letters
+if len(letters) > 10:
+    print("Too many letters!")
+    exit()
+
+# Generate all permutations of digits for these letters
+for perm in permutations(range(10), len(letters)):
+    # Create a mapping of letter -> digit
+    mapping = dict(zip(letters, perm))
+    
+    # Leading letters cannot be 0
+    if mapping[word1[0]] == 0 or mapping[word2[0]] == 0 or mapping[word3[0]] == 0:
+        continue
+    
+    # Convert words to numbers using the mapping
+    val1 = sum(mapping[ch] * (10 ** i) for i, ch in enumerate(reversed(word1)))
+    val2 = sum(mapping[ch] * (10 ** i) for i, ch in enumerate(reversed(word2)))
+    val3 = sum(mapping[ch] * (10 ** i) for i, ch in enumerate(reversed(word3)))
+    
+    # Check if it satisfies the equation
+    if val1 + val2 == val3:
+        print(f"{word1} = {val1}")
+        print(f"{word2} = {val2}")
+        print(f"{word3} = {val3}")
+        print("Letter mapping:")
+        for letter in letters:
+            print(f"{letter} = {mapping[letter]}")
+        break
+
+```
+
+<h2>Output:</h2>
+
+<img width="388" height="417" alt="image" src="https://github.com/user-attachments/assets/ce430433-d646-4126-8cf0-44d1233a413d" />
+
 <h2>Result:</h2>
 <p> Thus a Cryptarithmetic Problem was solved using Python successfully</p>
